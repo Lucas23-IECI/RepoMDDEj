@@ -85,3 +85,81 @@ console.log("Valor no definido: ", valorNoDefinido);
 const simbolo = Symbol("Simbolo");
 
 console.log("Simbolo: ", simbolo);
+
+
+// ! tipos de cambios no primitivos
+
+// ? object: Colección de pares clave-valor, contiene propiedades y métodos.
+
+const estudiante = { // lo que va dentro son las propiedades del objeto
+
+    nombre: "Lucas",
+    apellido: "Méndez",
+    edad: 20,
+    estudiando: true, //true porque actualmente estoy estudiando
+    carrera: "IECI",
+    universidad: "UBB",
+    nacionalidad: "Chilena",
+
+
+    saludar: function () {
+        console.log("Hola, soy Lucas");
+    }
+
+};
+
+
+
+//snippets: atajo de teclado para escribir un código
+
+console.log(estudiante);
+
+console.log("Carrera: ", estudiante.carrera);
+
+console.log("Estudiando: ", estudiante.estudiando);
+
+
+
+// ? Array: Son objetos especiales que almacenan elementos. Pueden contener valores de cualquier tipo (Puede ser un array solo de numeros, solo de strings, solo de booleanos, o mezclados, etc)
+
+const arrayNum = [1, 2, 3, 4, 5];   //array de numeros
+const arrayString = ["Hola", "Mundo", "Chile"]; //array de strings
+const arrayBoolean = [true, false, true, false]; //array de booleanos
+const arrayMix = [1, "Hola", true]; //array mixto
+
+
+console.log("Array de numeros: ", arrayNum);
+console.log("Posición 1 del array de numeros: ", arrayNum[0]);
+console.log("Posición 3 del array de numeros: ", arrayNum[2]);
+console.log("Posición 5 del array de numeros: ", arrayNum[5]);
+
+const array = [
+    {
+        nombre: "Lucas", //ESTO ES SOLO UN ELEMENTO DEL ARRAY
+        universidad: "UBB"
+    },
+    10,
+    true,
+    "Hola a todos!",
+    [1],
+    null
+]
+
+console.log('Array: ', array); //Ojito, se pueden hacer arrays dentro de un array
+console.log('Posición 3 del array: ', array[2]);
+console.log('Posición 4 del array: ', array[3]);
+
+
+// ? Function: Es un objeto especial en JavaScript que contiene un bloque de código ejecutable. Se puede invocar (llamar) a la función en cualquier momento.
+
+function suma(a, b) {
+    return a + b;
+}
+
+console.log("La suma es: ", suma(3, 5));
+
+// ? Date: Se utiliza para trabajar con fechas y horas.
+
+let fechaActual = new Date(); //new es una palabra reservada que se utiliza para crear un objeto o hacer una instancia
+
+console.log("Fecha actual: ", fechaActual);
