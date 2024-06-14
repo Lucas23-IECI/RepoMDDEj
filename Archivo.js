@@ -324,3 +324,165 @@ console.log(panes, pancitos); //['🥐', '🍞'], ['🥐', '🍞'] //SOLO SE MOD
 panes.push('🥖');
 console.log(panes, pancitos); //['🥐', '🍞', '🥖'], ['🥐', '🍞', '🥖'] //SE MODIFICO PANES, PERO COMO PANCITOS ESTA REFERENCIANDO A PANES, SE MODIFICO!!!!!!!
 */
+
+
+// ! Funciones
+
+// ? Funciones declarativas
+
+function suma(a, b) {
+    return a + b;
+}
+
+console.log("La suma es: ", suma(3, 5));
+
+// ? Funciones expresivas
+
+const resta = function (a, b) {
+    return a - b;
+}
+
+console.log("La resta es: ", resta(10, 5));
+
+// ? Arrow functions
+
+const multiplicacion = (a, b) => {
+    return a * b;
+}
+
+console.log("La multiplicación es: ", multiplicacion(2, 3));
+
+// ? Funciones anónimas
+
+const division = function (a, b) {
+    return a / b;
+}
+
+console.log("La división es: ", division(10, 2));
+
+// ? Funciones autoejecutables
+
+(function () {
+    console.log("Hola, soy una función autoejecutable");
+})();
+
+// ? Funciones con parámetros por defecto
+
+function saludo(nombre = "Lucas") {
+    return `Hola, ${nombre}`;
+}
+
+console.log(saludo());
+
+// ? Funciones con parámetros rest
+
+// este tipo de funciones se utiliza cuando no sabemos cuantos parametros vamos a recibir en la funcion y se utiliza el operador rest que es los tres puntos "..." y se le puede poner cualquier nombre, pero se recomienda poner "rest" para que sea mas entendible el codigo
+
+function sumar(...numeros) {
+    return numeros.reduce((a, b) => a + b);
+}
+
+console.log(sumar(1, 2, 3, 4, 5));
+
+// por ejemplo esta funcion recibe un numero y el resto de los parametros son los numeros que se van a sumar y se va a sumar el numero que se paso mas los numeros que se pasaron en la funcion sumar
+
+// ! Asincronismo
+
+// se trata de que una funcion no se ejecuta de manera secuencial, sino que se ejecuta de manera paralela, es decir, se ejecuta en un tiempo diferente al que se ejecuta la funcion principal
+
+// ? Callbacks
+
+// Los callbacks son funciones que se pasan como argumentos a otras funciones y se ejecutan después de que una operación asincrónica ha sido completada. Para hacerlo más sencillo de entender, un callback es una función que se ejecuta después de que otra función haya terminado de ejecutarse.
+
+function mostrarMensaje(callback) {
+    setTimeout(() => {
+        callback("Hola, soy un callback");
+    }, 3000);
+}
+
+function mensaje(mensaje) {
+    console.log(mensaje);
+}
+
+mostrarMensaje(mensaje); // el output de este codigo es "Hola, soy un callback" y se va a mostrar despues de 3 segundos, porque? porque se esta utilizando un setTimeout que es una funcion asincrona y se esta utilizando un callback que se va a ejecutar despues de que se haya ejecutado la funcion mostrarMensaje
+
+// la funcion mensaje es un callback que se ejecuta despues de que se haya ejecutado la funcion mostrarMensaje, ojo con esto, entonces en resumen, este pequeño codigo funciona de la siguiente manera, se ejecuta la funcion mostrarMensaje, se ejecuta el setTimeout que tiene un tiempo de 3 segundos, despues de que se haya ejecutado el setTimeout, se ejecuta la funcion mensaje que es un callback
+
+// otro ejemplo
+
+function hervirAgua(callback) {
+    setTimeout(() => {
+        console.log('Agua hervida');
+        callback(); // Llama a la función callback después de hervir el agua
+    }, 3000); // Toma 3 segundos hervir el agua
+}
+
+function hacerCafe() {
+    console.log('Haciendo café');
+}
+
+hervirAgua(hacerCafe); // Llama a la función hervirAgua y le pasa la función hacerCafe como callback para que se ejecute después de hervir el agua y se haga el café
+
+
+// ? Promesas
+
+// Las promesas son objetos que representan la terminación o el fracaso de una operación asincrónica. Las promesas son una mejora de los callbacks y permiten un mejor manejo de errores y una mejor legibilidad del código. Las promesas tienen tres estados: pendiente, cumplida y rechazada.
+
+// Las promesas tienen dos parámetros: resolve y reject. Resolve se ejecuta cuando la promesa se cumple y reject se ejecuta cuando la promesa es rechazada.
+
+const promesa = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("La promesa se cumplió");
+    }, 3000);
+});
+
+promesa.then((mensaje) => {
+    console.log(mensaje);
+});
+
+// explicare todo paso por paso, linea de codigo por linea de codigo para que se entienda mejor:
+/*
+const promesa = new Promise((resolve, reject) => { //se crea una promesa que recibe dos parametros, resolve y reject, resolve se ejecuta cuando la promesa se cumple y reject se ejecuta cuando la promesa es rechazada
+    setTimeout(() => { //se utiliza un setTimeout para simular una operacion asincrona
+        resolve("La promesa se cumplió"); //se ejecuta el resolve despues de 3 segundos
+    }, 3000); //se ejecuta despues de 3 segundos
+}); //se crea la promesa
+
+promesa.then((mensaje) => { //se ejecuta el then despues de que se haya cumplido la promesa
+    console.log(mensaje); //se imprime el mensaje que se paso en el resolve
+}); //se ejecuta el then
+*/
+
+// ? Async / Await
+
+// Async / Await es una forma de escribir código asincrónico de manera más clara y legible. Async es una palabra clave que se utiliza para declarar una función asincrónica y Await es una palabra clave que se utiliza para esperar a que una promesa se cumpla. Async / Await es una mejora de las promesas y permite escribir código asincrónico de manera más sencilla.
+
+// - **`async`**: Es una palabra clave que se coloca antes de una función para indicar que esa función va a realizar operaciones asíncronas. Cuando una función es declarada con **`async`**, automáticamente devuelve una promesa.
+// - ** `await` **: Se usa dentro de una función ** `async` ** y pausa la ejecución de la función hasta que la promesa sea resuelta.Básicamente, espera a que la promesa sea resuelta y devuelve su resultado.
+
+async function mostrarMensaje() {
+    return "Hola, soy un mensaje";
+}
+
+async function mensaje() {
+    const mensaje = await mostrarMensaje();
+    console.log(mensaje);
+}
+
+mensaje();
+
+// explicare todo paso por paso, linea de codigo por linea de codigo para que se entienda mejor:
+/*
+async function mostrarMensaje() { //se declara una funcion asincrona
+    return "Hola, soy un mensaje"; //retorna un mensaje
+} 
+
+async function mensaje() { //se declara una funcion asincrona
+    const mensaje = await mostrarMensaje(); //se espera a que se cumpla la promesa y se guarda en la variable mensaje
+    console.log(mensaje); //se imprime el mensaje
+}
+
+mensaje(); //se ejecuta la funcion mensaje
+
+output = "Hola, soy un mensaje"
+*/
